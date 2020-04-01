@@ -1,11 +1,11 @@
 --006
-SQL의 구분
-DDL
-(CREATE / ALTER / DROP)
-DML
-(INSERT / SELECT / UPDATE / DELETE) - CRUD
-DCL
-(GRANT/ REVOKE)
+--SQL의 구분
+--DDL
+--(CREATE / ALTER / DROP)
+--DML
+--(INSERT / SELECT / UPDATE / DELETE) - CRUD
+--DCL
+--(GRANT/ REVOKE)
 
 CREATE MEMBER(
     ID          VARCHAR2(50),
@@ -19,9 +19,9 @@ CREATE MEMBER(
 );
 
 --007
-CHARACTER 형식 : CHAR(3), VARCHAR2(3), NCHAR(3), NVARCHAR(3)
-VAR(VARiable) - 가변 길이 데이터, 최대값을 지정해줌
-N(National) - 1글자당 2 or 3bytes 사용, 전세계의 언어에 적용 가능
+--CHARACTER 형식 : CHAR(3), VARCHAR2(3), NCHAR(3), NVARCHAR(3)
+--VAR(VARiable) - 가변 길이 데이터, 최대값을 지정해줌
+--N(National) - 1글자당 2 or 3bytes 사용, 전세계의 언어에 적용 가능
 
 CREATE MEMBER(
     ID          VARCHAR2(50),
@@ -40,18 +40,18 @@ select lengthb('ab') from dual; --lengthb = length byte
 select lengthb('한글') from dual;
 
 --008
-LONG    -- 2Gb, 숫자형식이 아닌 Caracter 형식, 예전에 쓰던 방식이라서 하나의 컬럼에 LONG타입을 사용하면 다른 컬럼에 사용할 수 없음
-CLOB    -- 4Gb, 대용량 데이터 타입
-NCLOB   -- 4Gb, 대용량 유니코드 데이터 타입
+--LONG    -- 2Gb, 숫자형식이 아닌 Caracter 형식, 예전에 쓰던 방식이라서 하나의 컬럼에 LONG타입을 사용하면 다른 컬럼에 사용할 수 없음
+--CLOB    -- 4Gb, 대용량 데이터 타입
+--NCLOB   -- 4Gb, 대용량 유니코드 데이터 타입
 
-NUMBER(4)   -- 최대 4자로 이루어진 숫자
-NUMBER(6, 2)    -- 소수점 2자리를 포함하는 최대 6자리 숫자
-NUMBER(6, -2)   -- 소수점 -2자리에서 반올림하는 최대 6자리 숫자
-NUMBER  -- NUMBER(38, *)
-NUMBER(*, 5)    -- NUMBER(38, 5)
+--NUMBER(4)   -- 최대 4자로 이루어진 숫자
+--NUMBER(6, 2)    -- 소수점 2자리를 포함하는 최대 6자리 숫자
+--NUMBER(6, -2)   -- 소수점 -2자리에서 반올림하는 최대 6자리 숫자
+--NUMBER  -- NUMBER(38, *)
+--NUMBER(*, 5)    -- NUMBER(38, 5)
 
-DATE        --년-월-일
-TIMESTAMP   --년-월-일-시-분-초
+--DATE        --년-월-일
+--TIMESTAMP   --년-월-일-시-분-초
 
 
 --009
@@ -96,20 +96,31 @@ CREATE TABLE MEMBER_ROLE(
 
 
 --011
-INSERT INTO [테이블] VALUES (모든 값 목록);
-INSERT INTO [테이블](필드명) VALUES (각 필드 값);
+--INSERT INTO [테이블] VALUES (모든 값 목록);
+--INSERT INTO [테이블](필드명) VALUES (각 필드 값);
 -- 지정되지 않는 값은 NULL값이 들어감
 
-SELECT * FROM [테이블];
+--SELECT * FROM [테이블];
 
 INSERT INTO MEMBER (ID, PWD) VALUES ('engsk1211', '111');
 SELECT * FROM MEMBER;
 
-SELECT [필드명] FROM [테이블];
+--SELECT [필드명] FROM [테이블];
 SELECT ID, NAME, PWD FROM MEMBER;
 
-[필드명] AS [별칭]   -- 필드명을 별칭으로 사용, AS는 생략 가능
+--[필드명] AS [별칭]   -- 필드명을 별칭으로 사용, AS는 생략 가능
 SELECT ID AS USER_ID, NAME, PWD FROM MEMBER;
 SELECT ID USER_ID, NAME, PWD FROM MEMBER;
 SELECT ID "user id", NAME, PWD FROM MEMBER; -- 큰따옴표로 묶인 별칭은 대소문자가 구분된채로 사용됨
+
+
+--012
+--UPDATE [테이블] SET [필드명]=[값];
+UPDATE MEMBER SET PWD = '222';
+SELECT * FROM MEMBER;
+--WHERE절 = 조건절, WHERE [필드명]=[조건값];
+UPDATE MEMBER SET PWD = '111' WHERE ID = 'newlec1';
+--DELETE [테이블] WHERE [필드명]=[조건값];
+DELETE MEMBER WHERE ID='newlec2';
+
 
