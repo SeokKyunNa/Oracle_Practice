@@ -65,6 +65,7 @@ ALTER TABLE MEMBER ADD EMAIL VARCHAR2(200);
 
 
 --010
+--오라클은 예약어 등으로 이미 사용되는 용어는 큰따옴표로 감싸서 테이블명이나 컬럼명 등으로 사용 가능
 CREATE TABLE NOTICE(
     ID              NUMBER,
     TITLE           NVARCHAR2(100),
@@ -75,7 +76,7 @@ CREATE TABLE NOTICE(
     FILES           NVARCHAR2(1000)
 );
 
-CREATE TABLE COMMENT(
+CREATE TABLE "COMMENT"(
     ID          NUMBER,
     CONTENT     NVARCHAR2(2000),
     REGDATE     TIMESTAMP,
@@ -92,3 +93,23 @@ CREATE TABLE MEMBER_ROLE(
     MEMBER_ID       NVARCHAR2(50),
     ROLE_ID         VARCHAR2(50)
 );
+
+
+--011
+INSERT INTO [테이블] VALUES (모든 값 목록);
+INSERT INTO [테이블](필드명) VALUES (각 필드 값);
+-- 지정되지 않는 값은 NULL값이 들어감
+
+SELECT * FROM [테이블];
+
+INSERT INTO MEMBER (ID, PWD) VALUES ('engsk1211', '111');
+SELECT * FROM MEMBER;
+
+SELECT [필드명] FROM [테이블];
+SELECT ID, NAME, PWD FROM MEMBER;
+
+[필드명] AS [별칭]   -- 필드명을 별칭으로 사용, AS는 생략 가능
+SELECT ID AS USER_ID, NAME, PWD FROM MEMBER;
+SELECT ID USER_ID, NAME, PWD FROM MEMBER;
+SELECT ID "user id", NAME, PWD FROM MEMBER; -- 큰따옴표로 묶인 별칭은 대소문자가 구분된채로 사용됨
+
