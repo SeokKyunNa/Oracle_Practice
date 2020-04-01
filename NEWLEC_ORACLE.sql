@@ -28,7 +28,7 @@ CREATE MEMBER(
     PWD         NVARCHAR2(50),
     NAME        NVARCHAR2(50),
     GENDER      NCHAR(2),    -- CHAR(2 CHAR) = 2글자 입력 가능
-    AGE         NUMBER,
+    AGE         NUMBER(3),
     BIRTHDAY    CHAR(10),   --2000-01-02
     PHONE       CHAR(13),   --010-1234-5678
     REGDATE     DATE
@@ -38,3 +38,18 @@ select length('ab') from dual;
 select length('한글') from dual;
 select lengthb('ab') from dual; --lengthb = length byte
 select lengthb('한글') from dual;
+
+--008
+LONG    -- 2Gb, 숫자형식이 아닌 Caracter 형식, 예전에 쓰던 방식이라서 하나의 컬럼에 LONG타입을 사용하면 다른 컬럼에 사용할 수 없음
+CLOB    -- 4Gb, 대용량 데이터 타입
+NCLOB   -- 4Gb, 대용량 유니코드 데이터 타입
+
+NUMBER(4)   -- 최대 4자로 이루어진 숫자
+NUMBER(6, 2)    -- 소수점 2자리를 포함하는 최대 6자리 숫자
+NUMBER(6, -2)   -- 소수점 -2자리에서 반올림하는 최대 6자리 숫자
+NUMBER  -- NUMBER(38, *)
+NUMBER(*, 5)    -- NUMBER(38, 5)
+
+DATE        --년-월-일
+TIMESTAMP   --년-월-일-시-분-초
+
