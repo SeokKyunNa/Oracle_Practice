@@ -165,3 +165,13 @@ SELECT * FROM NOTICE WHERE CONTENT IS NULL; -- 내용을 입력하지 않은 게시글 조회
 SELECT * FROM NOTICE WHERE CONTENT IS NOT NULL; -- 내용이 존재하는 게시글만 조회
 
 
+--016
+-- 관계 연산자 NOT, AND, OR, BETWEEN, IN
+SELECT * FROM NOTICE WHERE HIT = 0 OR HIT = 1 OR HIT = 2;   -- 조회수가 0, 1, 2인 게시글 조회
+SELECT * FROM NOTICE WHERE 0 <= HIT AND HIT <= 2;   -- 조회수가 0, 1, 2인 게시글 조회
+SELECT * FROM NOTICE WHERE HIT BETWEEN 0 AND 2;     -- 조회수가 0, 1, 2인 게시글 조회
+
+SELECT * FROM NOTICE WHERE HIT IN (0, 2, 7);    -- 조회수가 0, 2, 7인 게시글 조회
+SELECT * FROM NOTICE WHERE HIT NOT IN (0, 2, 7);    -- 조회수가 0, 2, 7이 아닌 게시글 조회
+
+
