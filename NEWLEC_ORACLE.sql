@@ -124,3 +124,18 @@ UPDATE MEMBER SET PWD = '111' WHERE ID = 'newlec1';
 DELETE MEMBER WHERE ID='newlec2';
 
 
+--013
+--트랜잭션이란? 업무 실행 단위, 논리 명령 단위, 개념상의 단위
+-- 업무적인 단위       물리적인 명령어 단위
+-- 계좌이체              update             1. 현재 세션을 위한 임시저장소에서만 테스트
+--                      update             2. 그 동안 다른 세션이 건드리디 못하도록 LOCK, 완료 후 UNLOCK, COMMIT;
+-- 이벤트 게시글 등록     insert
+--                      update
+
+SELECT ID "user id", NAME, PWD FROM MEMBER;
+INSERT INTO MEMBER (ID, PWD) VALUES ('test', '111');
+INSERT INTO MEMBER (ID, PWD) VALUES ('dragon', '444');
+
+COMMIT;     -- 임시 저장소의 내용을 데이터베이스에 적용
+ROLLBACK;   -- 임시 저장소의 내용을 적용시키지 않고 되돌림
+-- COMMIT이나 ROLLBACK 할 때까지 해당 테이블은 LOCK 상태. COMMIT이나 ROLLBACK 이후 UNLOCK 됨
