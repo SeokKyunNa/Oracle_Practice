@@ -152,3 +152,16 @@ SELECT 1 + 'A' FROM DUAL;   -- 오류
 SELECT NAME || '(' || ID || ')' "NAME(ID)" FROM MEMBER;
 
 
+--015
+-- 비교 연산자 =, !=, ^=, <>, >, <, >=, <=, IS NULL, IS NOT NULL
+-- 같지 않음을 뜻하는 3가지 연산자
+-- != : 다른 DBMS에서 사용하기에 표준이 됨
+-- <> : ANSI SQL에서 정의하는 연산자
+-- ^= : 오라클에서 사용하는 연산자
+
+SELECT * FROM NOTICE WHERE WRITER_ID = 'newlec';    -- 작성자가 newlec인 글 조회
+SELECT * FROM NOTICE WHERE HIT > 3;     -- 조회수가 3보다 큰 글 조회
+SELECT * FROM NOTICE WHERE CONTENT IS NULL; -- 내용을 입력하지 않은 게시글 조회
+SELECT * FROM NOTICE WHERE CONTENT IS NOT NULL; -- 내용이 존재하는 게시글만 조회
+
+
