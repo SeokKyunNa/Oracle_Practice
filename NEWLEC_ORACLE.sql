@@ -139,3 +139,16 @@ INSERT INTO MEMBER (ID, PWD) VALUES ('dragon', '444');
 COMMIT;     -- 임시 저장소의 내용을 데이터베이스에 적용
 ROLLBACK;   -- 임시 저장소의 내용을 적용시키지 않고 되돌림
 -- COMMIT이나 ROLLBACK 할 때까지 해당 테이블은 LOCK 상태. COMMIT이나 ROLLBACK 이후 UNLOCK 됨
+
+
+--014
+-- 산술 연산자 +, -, *, /
+-- 문자의 붙임은 || 연산자를 사용
+-- 연산이 사용된 컬럼은 별칭을 사용
+SELECT HIT+1 "hit" FROM NOTICE;
+SELECT 1+'3' FROM DUAL; -- 오라클에서 산술연산자는 무조건 숫자로 계산됨
+SELECT 1||'3' FROM DUAL;    -- 문자의 붙임은 || 연산자를 사용
+SELECT 1 + 'A' FROM DUAL;   -- 오류
+SELECT NAME || '(' || ID || ')' "NAME(ID)" FROM MEMBER;
+
+
