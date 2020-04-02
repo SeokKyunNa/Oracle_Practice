@@ -175,3 +175,10 @@ SELECT * FROM NOTICE WHERE HIT IN (0, 2, 7);    -- Á¶È¸¼ö°¡ 0, 2, 7ÀÎ °Ô½Ã±Û Á¶È
 SELECT * FROM NOTICE WHERE HIT NOT IN (0, 2, 7);    -- Á¶È¸¼ö°¡ 0, 2, 7ÀÌ ¾Æ´Ñ °Ô½Ã±Û Á¶È¸
 
 
+--017
+-- ÆÐÅÏ ºñ±³ ¿¬»êÀÚ LIKE, %, _
+SELECT * FROM MEMBER WHERE NAME LIKE '¹Ú%';  -- '¹Ú'¾¾ ¼ºÀ» °¡Áø È¸¿ø Á¶È¸
+SELECT * FROM MEMBER WHERE NAME LIKE 'À¯__'; -- 'À¯'¾¾ÀÌ°í ÀÌ¸§ÀÌ µÎ±ÛÀÚÀÎ È¸¿ø Á¶È¸
+SELECT * FROM MEMBER WHERE NAME NOT LIKE '¹Ú%';  -- '¹Ú'¾¾ ¼ºÀ» Á¦¿ÜÇÑ È¸¿ø Á¶È¸
+SELECT * FROM MEMBER WHERE NAME LIKE '%¼®%'; -- ÀÌ¸§¿¡ '¼®'ÀÚ°¡ µé¾î°£ È¸¿ø Á¶È¸
+
