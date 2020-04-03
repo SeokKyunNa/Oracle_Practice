@@ -1,4 +1,4 @@
---006
+--006   create member table
 --SQLÀÇ ±¸ºÐ
 --DDL
 --(CREATE / ALTER / DROP)
@@ -18,7 +18,7 @@ CREATE MEMBER(
     REGDATE     DATE
 );
 
---007
+--007   oracle data type (char)
 --CHARACTER Çü½Ä : CHAR(3), VARCHAR2(3), NCHAR(3), NVARCHAR(3)
 --VAR(VARiable) - °¡º¯ ±æÀÌ µ¥ÀÌÅÍ, ÃÖ´ë°ªÀ» ÁöÁ¤ÇØÁÜ
 --N(National) - 1±ÛÀÚ´ç 2 or 3bytes »ç¿ë, Àü¼¼°èÀÇ ¾ð¾î¿¡ Àû¿ë °¡´É
@@ -39,7 +39,7 @@ select length('ÇÑ±Û') from dual;
 select lengthb('ab') from dual; --lengthb = length byte
 select lengthb('ÇÑ±Û') from dual;
 
---008
+--008   oracle data type (number, date)
 --LONG    -- 2Gb, ¼ýÀÚÇü½ÄÀÌ ¾Æ´Ñ Caracter Çü½Ä, ¿¹Àü¿¡ ¾²´ø ¹æ½ÄÀÌ¶ó¼­ ÇÏ³ªÀÇ ÄÃ·³¿¡ LONGÅ¸ÀÔÀ» »ç¿ëÇÏ¸é ´Ù¸¥ ÄÃ·³¿¡ »ç¿ëÇÒ ¼ö ¾øÀ½
 --CLOB    -- 4Gb, ´ë¿ë·® µ¥ÀÌÅÍ Å¸ÀÔ
 --NCLOB   -- 4Gb, ´ë¿ë·® À¯´ÏÄÚµå µ¥ÀÌÅÍ Å¸ÀÔ
@@ -54,7 +54,7 @@ select lengthb('ÇÑ±Û') from dual;
 --TIMESTAMP   --³â-¿ù-ÀÏ-½Ã-ºÐ-ÃÊ
 
 
---009
+--009   alter table
 --TABLE COLUMN MODIFY µ¥ÀÌÅÍ Çü½ÄÀÌ °°°í, µ¥ÀÌÅÍº¸´Ù Å« Å©±â·Î¸¸ º¯°æ °¡´É
 ALTER TABLE MEMBER MODIFY ID NVARCHAR2(50);
 --TABLE COLUMN DROP
@@ -64,7 +64,7 @@ ALTER TABLE MEMBER ADD EMAIL VARCHAR2(200);
 --DDL(Å×ÀÌºíÀÇ ¼öÁ¤ Æ÷ÇÔ)Àº ¸í·É¾îº¸´Ù´Â ÅøÀ» »ç¿ë
 
 
---010
+--010   create table
 --¿À¶óÅ¬Àº ¿¹¾à¾î µîÀ¸·Î ÀÌ¹Ì »ç¿ëµÇ´Â ¿ë¾î´Â Å«µû¿ÈÇ¥·Î °¨½Î¼­ Å×ÀÌºí¸íÀÌ³ª ÄÃ·³¸í µîÀ¸·Î »ç¿ë °¡´É
 CREATE TABLE NOTICE(
     ID              NUMBER,
@@ -95,7 +95,7 @@ CREATE TABLE MEMBER_ROLE(
 );
 
 
---011
+--011   manipulate data (insert/select)
 --INSERT INTO [Å×ÀÌºí] VALUES (¸ðµç °ª ¸ñ·Ï);
 --INSERT INTO [Å×ÀÌºí](ÇÊµå¸í) VALUES (°¢ ÇÊµå °ª);
 -- ÁöÁ¤µÇÁö ¾Ê´Â °ªÀº NULL°ªÀÌ µé¾î°¨
@@ -114,7 +114,7 @@ SELECT ID USER_ID, NAME, PWD FROM MEMBER;
 SELECT ID "user id", NAME, PWD FROM MEMBER; -- Å«µû¿ÈÇ¥·Î ¹­ÀÎ º°ÄªÀº ´ë¼Ò¹®ÀÚ°¡ ±¸ºÐµÈÃ¤·Î »ç¿ëµÊ
 
 
---012
+--012   manipulate data (update/delete)
 --UPDATE [Å×ÀÌºí] SET [ÇÊµå¸í]=[°ª];
 UPDATE MEMBER SET PWD = '222';
 SELECT * FROM MEMBER;
@@ -124,7 +124,7 @@ UPDATE MEMBER SET PWD = '111' WHERE ID = 'newlec1';
 DELETE MEMBER WHERE ID='newlec2';
 
 
---013
+--013   trasaction (commit/rollback)
 --Æ®·£Àè¼ÇÀÌ¶õ? ¾÷¹« ½ÇÇà ´ÜÀ§, ³í¸® ¸í·É ´ÜÀ§, °³³ä»óÀÇ ´ÜÀ§
 -- ¾÷¹«ÀûÀÎ ´ÜÀ§       ¹°¸®ÀûÀÎ ¸í·É¾î ´ÜÀ§
 -- °èÁÂÀÌÃ¼              update             1. ÇöÀç ¼¼¼ÇÀ» À§ÇÑ ÀÓ½ÃÀúÀå¼Ò¿¡¼­¸¸ Å×½ºÆ®
@@ -141,7 +141,7 @@ ROLLBACK;   -- ÀÓ½Ã ÀúÀå¼ÒÀÇ ³»¿ëÀ» Àû¿ë½ÃÅ°Áö ¾Ê°í µÇµ¹¸²
 -- COMMITÀÌ³ª ROLLBACK ÇÒ ¶§±îÁö ÇØ´ç Å×ÀÌºíÀº LOCK »óÅÂ. COMMITÀÌ³ª ROLLBACK ÀÌÈÄ UNLOCK µÊ
 
 
---014
+--014   arithmetic operator
 -- »ê¼ú ¿¬»êÀÚ +, -, *, /
 -- ¹®ÀÚÀÇ ºÙÀÓÀº || ¿¬»êÀÚ¸¦ »ç¿ë
 -- ¿¬»êÀÌ »ç¿ëµÈ ÄÃ·³Àº º°ÄªÀ» »ç¿ë
@@ -152,7 +152,7 @@ SELECT 1 + 'A' FROM DUAL;   -- ¿À·ù
 SELECT NAME || '(' || ID || ')' "NAME(ID)" FROM MEMBER;
 
 
---015
+--015   comparison operator
 -- ºñ±³ ¿¬»êÀÚ =, !=, ^=, <>, >, <, >=, <=, IS NULL, IS NOT NULL
 -- °°Áö ¾ÊÀ½À» ¶æÇÏ´Â 3°¡Áö ¿¬»êÀÚ
 -- != : ´Ù¸¥ DBMS¿¡¼­ »ç¿ëÇÏ±â¿¡ Ç¥ÁØÀÌ µÊ
@@ -165,7 +165,7 @@ SELECT * FROM NOTICE WHERE CONTENT IS NULL; -- ³»¿ëÀ» ÀÔ·ÂÇÏÁö ¾ÊÀº °Ô½Ã±Û Á¶È¸
 SELECT * FROM NOTICE WHERE CONTENT IS NOT NULL; -- ³»¿ëÀÌ Á¸ÀçÇÏ´Â °Ô½Ã±Û¸¸ Á¶È¸
 
 
---016
+--016   relational operator
 -- °ü°è ¿¬»êÀÚ NOT, AND, OR, BETWEEN, IN
 SELECT * FROM NOTICE WHERE HIT = 0 OR HIT = 1 OR HIT = 2;   -- Á¶È¸¼ö°¡ 0, 1, 2ÀÎ °Ô½Ã±Û Á¶È¸
 SELECT * FROM NOTICE WHERE 0 <= HIT AND HIT <= 2;   -- Á¶È¸¼ö°¡ 0, 1, 2ÀÎ °Ô½Ã±Û Á¶È¸
@@ -175,10 +175,25 @@ SELECT * FROM NOTICE WHERE HIT IN (0, 2, 7);    -- Á¶È¸¼ö°¡ 0, 2, 7ÀÎ °Ô½Ã±Û Á¶È
 SELECT * FROM NOTICE WHERE HIT NOT IN (0, 2, 7);    -- Á¶È¸¼ö°¡ 0, 2, 7ÀÌ ¾Æ´Ñ °Ô½Ã±Û Á¶È¸
 
 
---017
+--017   pattern comparison operator
 -- ÆÐÅÏ ºñ±³ ¿¬»êÀÚ LIKE, %, _
 SELECT * FROM MEMBER WHERE NAME LIKE '¹Ú%';  -- '¹Ú'¾¾ ¼ºÀ» °¡Áø È¸¿ø Á¶È¸
 SELECT * FROM MEMBER WHERE NAME LIKE 'À¯__'; -- 'À¯'¾¾ÀÌ°í ÀÌ¸§ÀÌ µÎ±ÛÀÚÀÎ È¸¿ø Á¶È¸
 SELECT * FROM MEMBER WHERE NAME NOT LIKE '¹Ú%';  -- '¹Ú'¾¾ ¼ºÀ» Á¦¿ÜÇÑ È¸¿ø Á¶È¸
 SELECT * FROM MEMBER WHERE NAME LIKE '%¼®%'; -- ÀÌ¸§¿¡ '¼®'ÀÚ°¡ µé¾î°£ È¸¿ø Á¶È¸
+
+
+--018 Regular expression
+-- Âü°í »çÀÌÆ® https://regexlib.com
+-- [] ´ë°ýÈ£ ÇÑ Ä­Àº ÇÑ ±ÛÀÚ¸¦ ÀÇ¹ÌÇÔ, ¿©·¯°³ÀÇ ¹®ÀÚ¸¦ ³ÖÀ» ¼ö ÀÖÀ½
+-- \d decimal 1±ÛÀÚ¸¦ ÀÇ¹Ì
+-- {} Áß°ýÈ£·Î ¹Ù·Î ¾ÕÀÇ ±ÛÀÚ°¡ ¸î¹ø ¹Ýº¹µÇ´ÂÁö ÁöÁ¤
+-- ^ Á¤±Ô½ÄÀÇ ½ÃÀÛ
+-- $ Á¤±Ô½ÄÀÇ ³¡
+-- Á¤±Ô½Ä Á¶°Ç¿Ü¿¡ ´Ù¸¥ ¹®ÀÚ°¡ Æ÷ÇÔµÈ µ¥ÀÌÅÍ¸¦ Ã£À»¶§´Â ^ $ »ý·«
+-- Á¤±Ô½ÄÀº [ÄÃ·³] LIKE [Á¶°Ç]ÀÌ ¾Æ´Ñ REGEXP_LIKE([ÄÃ·³], [Á¶°Ç]) »ç¿ë
+-- ÇÚµåÆù ¹øÈ£ ¿¹Á¦    ^01[016-9]-\d{3,4}-\d{4}$
+SELECT * FROM NOTICE WHERE REGEXP_LIKE (TITLE, '^01[016-9]-\d{3,4}-\d{4}$');
+SELECT * FROM NOTICE WHERE REGEXP_LIKE (TITLE, '01[016-9]-\d{3,4}-\d{4}');
+
 
