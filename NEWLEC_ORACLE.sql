@@ -224,4 +224,57 @@ SELECT * FROM MEMBER;
 SELECT AGE FROM MEMBER;
 SELECT DISTINCT AGE FROM MEMBER;
 
+--022 중간 정리
 
+
+--023   string function (1)
+-- 문자열 추출 함수 - SUBSTR(문자열, 시작위치, 길이)
+-- WHERE 절에는 함수를 사용하는 것을 지양, 데이터의 수만큼 함수가 호출되어서 속도에 문제가 생김
+SELECT SUBSTR('HELLO', 1, 3) FROM DUAL; -- 1번째부터 3글자 출력
+SELECT SUBSTR('HELLO', 3) FROM DUAL;    -- 3번째부터 출력
+SELECT SUBSTRB('HELLO', 3) FROM DUAL;   -- 3번째 바이트부터 출력
+
+SELECT NAME FROM MEMBER;
+SELECT SUBSTR(NAME, 2) FROM MEMBER;
+SELECT SUBSTRB(NAME, 4) FROM MEMBER;
+
+SELECT * FROM MEMBER;
+SELECT NAME, SUBSTR(BIRTHDAY, 6, 2) FROM MEMBER;    -- 이름과 태어난 월 출력
+
+SELECT * FROM MEMBER WHERE SUBSTR(PHONE, 1, 3) = '011';  -- 전화번호가 011로 시작하는 회원 정보
+SELECT * FROM MEMBER WHERE PHONE LIKE '011%';
+
+SELECT * FROM MEMBER WHERE SUBSTR(BIRTHDAY, 6, 2) IN (07, 08, 09);  -- 생일이 7, 8, 9월인 회원 정보
+SELECT * FROM MEMBER WHERE SUBSTR(BIRTHDAY, 6, 2) NOT IN (07, 08, 09);  -- 생일이 7, 8, 9월이 아닌 회원 정보
+
+SELECT * FROM MEMBER WHERE PHONE IS NULL AND SUBSTR(BIRTHDAY, 6, 2) IN (07, 08, 09);    -- 전화번호가 등록되지 않았고, 생일이 7, 8, 9월인 회원 정보
+
+-- 문자열 덧셈 함수 - CONCAT(문자열, 문자열)
+-- 성능면으로는 함수보다는 연산이 더 빠름
+SELECT CONCAT(3, '4') FROM DUAL;
+SELECT 3||'4' FROM DUAL;
+
+-- 문자열 트림 함수
+-- LTRIM(문자열) 왼쪽 공백 삭제
+-- RTRIM(문자열) 오른쪽 공백 삭제
+-- TRIM(문자열) 양쪽 공백 삭제
+SELECT LTRIM('    HELLO    ') FROM DUAL;
+SELECT RTRIM('    HELL0    ') FROM DUAL;
+SELECT TRIM('    HELLO    ') FROM DUAL;
+
+-- 문자열 소문자 또는 대문자로 변경
+-- LOWER(문자열) 대문자를 소문자로 변경
+-- UPPER(문자열) 소문자를 대문자로 변경
+SELECT LOWER('ENGsk') FROM DUAL;
+SELECT UPPER('ENGsk') FROM DUAL;
+
+ -- 문자열 치환 함수
+ -- REPLACE(문자열, 바뀔문자열, 바꿀문자열)
+ -- TRANSLATE(문자열, 바뀔문자열, 바꿀문자열), 같은 위치의 문자끼리 치환됨
+ SELECT REPLACE('WHERE WE ARE', 'WE', 'YOU') FROM DUAL;
+ SELECT TRANSLATE('WHERE WE ARE', 'WE', 'YOU') FROM DUAL;
+ 
+ SELECT NAME, REPLACE(EMAIL, ' ', '') FROM MEMBER;  -- 이메일 주소를 공백없이 조회
+ 
+ 
+ 
