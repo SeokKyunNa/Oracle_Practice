@@ -183,7 +183,7 @@ SELECT * FROM MEMBER WHERE NAME NOT LIKE '박%';  -- '박'씨 성을 제외한 회원 조회
 SELECT * FROM MEMBER WHERE NAME LIKE '%석%'; -- 이름에 '석'자가 들어간 회원 조회
 
 
---018 Regular expression
+--018   Regular expression (number)
 -- 참고 사이트 https://regexlib.com
 -- [] 대괄호 한 칸은 한 글자를 의미함, 여러개의 문자를 넣을 수 있음
 -- \d decimal 1글자를 의미
@@ -195,5 +195,15 @@ SELECT * FROM MEMBER WHERE NAME LIKE '%석%'; -- 이름에 '석'자가 들어간 회원 조회
 -- 핸드폰 번호 예제    ^01[016-9]-\d{3,4}-\d{4}$
 SELECT * FROM NOTICE WHERE REGEXP_LIKE (TITLE, '^01[016-9]-\d{3,4}-\d{4}$');
 SELECT * FROM NOTICE WHERE REGEXP_LIKE (TITLE, '01[016-9]-\d{3,4}-\d{4}');
+
+
+--019   Regular expression (char)
+-- \w [a-zA-Z 0-9]와 같음, 공백을 포함한 모든 문자
+-- + 앞의 문자가 하나 이상 존재
+-- * 앞의 문자가 0개 이상 존재
+-- | OR와 같음, 조건 중 하나와 같을 때
+-- \D [^0-9]와 같음, 숫자가 아닌 경우
+-- 이메일 예제   \D\w+@\D\w*.(org|net|com)
+SELECT * FROM NOTICE WHERE REGEXP_LIKE (TITLE, '\D\w+@\D\w*.(org|net|com)');
 
 
