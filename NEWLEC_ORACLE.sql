@@ -326,3 +326,30 @@ SELECT ASCII('A') FROM DUAL;
 SELECT CHR(65) FROM DUAL;
 
 
+--025 number function
+-- 절대값을 구하는 함수
+-- ABS(숫자)
+SELECT ABS(35), ABS(-35) FROM DUAL;
+
+-- 음수/양수를 알려주는 함수
+-- SIGN(숫자), 양수=1, 음수=-1, 0=0
+SELECT SIGN(35), SIGN(-35), SIGN(0) FROM DUAL;
+
+-- 반올림 함수
+-- ROUND(숫자, 소수점자릿수), 소숫점자릿수를 입력하지 않으면 소숫점 첫번째에서 반올림
+SELECT ROUND(34.456789), ROUND(34.56789) FROM DUAL;
+SELECT ROUND(34.456789, 2), ROUND(34.456789, 3) FROM DUAL;
+
+-- 나눗셈 몫을 반환하는 함수
+-- TRUNC(분자/분모)
+-- 나눗셈 나머지를 반환하는 함수
+-- MOD(분자, 분모)
+SELECT TRUNC(17/5) 몫, MOD(17, 5) 나머지 FROM DUAL;
+
+-- 숫자의 제곱을 구하는 함수
+-- POWER(숫자, 제곱수)
+--숫자의 제곱근을 구하는 함수
+-- SQRT(숫자)
+SELECT POWER(5, 2), SQRT(25) FROM DUAL;
+
+
