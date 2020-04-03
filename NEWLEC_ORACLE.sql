@@ -269,12 +269,60 @@ SELECT LOWER('ENGsk') FROM DUAL;
 SELECT UPPER('ENGsk') FROM DUAL;
 
  -- 문자열 치환 함수
- -- REPLACE(문자열, 바뀔문자열, 바꿀문자열)
- -- TRANSLATE(문자열, 바뀔문자열, 바꿀문자열), 같은 위치의 문자끼리 치환됨
+ -- REPLACE(문자열, 바뀔문자열, 바꿀문자열) 바뀔문자열에 해당하는 문자열을 바꿀문자열로 치환
+ -- TRANSLATE(문자열, 바뀔문자열, 바꿀문자열) 같은 위치의 문자끼리 치환
  SELECT REPLACE('WHERE WE ARE', 'WE', 'YOU') FROM DUAL;
  SELECT TRANSLATE('WHERE WE ARE', 'WE', 'YOU') FROM DUAL;
  
  SELECT NAME, REPLACE(EMAIL, ' ', '') FROM MEMBER;  -- 이메일 주소를 공백없이 조회
  
  
- 
+--024  string function (2)
+-- 함수의 장점
+-- 복잡한 절차없이 다양한 결과물을 얻어낼 수 있음
+
+-- 문자열 패딩 함수
+-- LPAD(문자열, 길이, 채울문자) 문자열의 왼쪽을 길이만큼 채울문자로 채움
+-- RPAD(문자열, 길이, 채울문자) 문자열의 오른쪽을 길이만큼 채울문자로 채움
+-- 채울문자가 없으면 공백으로 채움
+-- 한글의 경우 바이트 단위가 달라서 영문과 차이가 있음
+SELECT LPAD('HELLO', 5) FROM DUAL;
+SELECT LPAD('HELLO', 5, '0') FROM DUAL;
+SELECT LPAD('HELLO', 10, '0') FROM DUAL;
+SELECT RPAD('HELLO', 10, '0') FROM DUAL;
+
+SELECT RPAD(NAME, 6, '_') FROM MEMBER;  -- 이름이 2글자면 _로 채워서 조회
+
+-- 첫 글자를 대문자로 치환
+-- INITCAP(문자열)
+SELECT INITCAP('the ....') FROM DUAL;
+SELECT INITCAP('the most important thing is ....') FROM DUAL;
+SELECT INITCAP('the most im하이portant t오케이hing is ....') FROM DUAL;
+
+-- 문자열 위치 검색 함수
+-- INSTR(문자열, 검색문자열, 위치, 순번)
+SELECT INSTR('ALL WE NEED TO IS JUST TO...', 'TO') FROM DUAL;   -- 첫번째로 검색되는 TO의 위치 조회
+SELECT INSTR('ALL WE NEED TO IS JUST TO...', 'TO', 15) FROM DUAL;   -- 15번째 이후로 검색되는 TO의 위치 조회
+SELECT INSTR('ALL WE NEED TO IS JUST TO...', 'TO', 1, 2) FROM DUAL; -- 두번째 검색되는 TO의 위치 조회
+
+SELECT INSTR(PHONE, '-', 1, 2) FROM MEMBER; -- 전화번호에서 두번째 -문자가 존재하는 위치 조회
+SELECT INSTR(PHONE, '-', 1, 2) - INSTR(PHONE, '-') - 1 FROM MEMBER; -- 전화번호에서 첫번째 -문자와 두번째 -문자 사이의 간격 조회
+SELECT SUBSTR(PHONE, INSTR(PHONE, '-')+1, INSTR(PHONE, '-', 1, 2)-INSTR(PHONE, '-')-1) FROM MEMBER; 전화번호에서 첫번째 -문자와 두번째 -문자 사이의 국번 조회
+
+-- 문자열 길이를 얻는 함수
+-- LENGTH(문자열)
+-- LENGTHB(문자열)
+SELECT LENGTH('WHERE WE ARE') FROM DUAL;
+
+SELECT PHONE, LENGTH(PHONE) FROM MEMBER;    -- 핸드폰 번호와 번호의 길이를 조회
+SELECT LENGTH(REPLACE(PHONE, '-', '')) FROM MEMBER; -- 핸드폰 번호에서 -문자를 없앤 번호의 길이를 조회
+
+-- 코드 값을 반환하는 함수
+-- ASCII(문자)
+SELECT ASCII('A') FROM DUAL;
+
+-- 코드 값으로 문자를 반환하는 함수
+-- CHR(코드값)
+SELECT CHR(65) FROM DUAL;
+
+
