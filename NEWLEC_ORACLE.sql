@@ -413,3 +413,59 @@ SELECT SYSDATE, ROUND(SYSDATE, 'D'), TRUNC(SYSDATE, 'D') FROM DUAL; -- 일 단위(�
 SELECT SYSDATE, ROUND(SYSDATE, 'HH'), TRUNC(SYSDATE, 'HH') FROM DUAL;   -- 시간 단위
 SELECT SYSDATE, ROUND(SYSDATE, 'MI'), TRUNC(SYSDATE, 'MI') FROM DUAL;   -- 분 단위
 
+
+--027   CASTING FUNCTION
+-- 숫자 - TO_CHAR() - 문자열 - TO_DATE() 날짜
+-- 날짜 - TO_CHAR() - 문자열 - TO_NUMBER() 숫자
+
+-- NUMBER 형식을 문자열(VARCHAR2)로 변환
+-- TO_CHAR(NUMBER, FORMAT)
+-- 포맷은 숫자의 길이보다 길어야 함
+-- 포맷문자
+-- 9 : 숫자
+-- 0 : 빈자리를 채우는 문자
+-- $ : 앞에 $ 표시
+-- , : 천 단위 구분자 표시
+-- . : 소수점 표시
+SELECT TO_CHAR(12345678, '$99,999,999,999.99') FROM DUAL;
+SELECT 123 || 'HELLO' FROM DUAL;
+SELECT TO_CHAR(123) || 'HELLO' FROM DUAL;
+SELECT TO_CHAR(12345678, '99,999,999') || 'HELLO' FROM DUAL;
+SELECT TO_CHAR(1234567890, '99,999,999') || 'HELLO' FROM DUAL;  -- 입력 숫자가 포맷보다 길면 올바르지 않은 형식으로 표현 됨
+SELECT TO_CHAR(1234567890, '009,999,999,999') || 'HELLO' FROM DUAL; -- 포맷0은 포맷보다 입력 숫자가 짧으면 0으로 채워줌
+SELECT TO_CHAR(1234567890, '999,999,999,999') || 'HELLO' FROM DUAL;
+SELECT TO_CHAR(1234567890, '999,999,999,999') || '원' FROM DUAL;
+SELECT TRIM(TO_CHAR(1234567890, '999,999,999,999')) || '원' FROM DUAL;
+
+SELECT TO_CHAR(1234567.12345, '9,999,999,999.9999') || '원' FROM DUAL;   -- 소수점은 표현 가능한 자릿수 하나 아래에서 반올림
+SELECT TO_CHAR(1234567.1, '9,999,999,999.9999') || '원' FROM DUAL;   -- 소수점은 포맷길이만큼 0으로 채워져서 표현됨
+
+-- DATE 형식으로 문자열(VARCHAR2)로 변환
+-- TO_CHAR(DATETIME)
+-- 포맷문자
+-- YYYY/RRRR/YY/YEAR : 년도표시 - 4자리/Y2K/2WKFL/영문
+-- MM/MON/MONTH : 월표시 - 2자리/영문3자리/영문전체
+-- DD/DAY/DDTH : 일표시 - 2자리/영문/2자리ST
+-- AM/PM : 오전/오후 표시
+-- HH/HH24 : 시간표시 - 12시간/24시간
+-- MI : 분표시 - 0~59
+-- SS : 초표시 - 0~59
+SELECT SYSDATE FROM DUAL;
+SELECT TO_CHAR(SYSDATE) FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'RRRR-MONTH-DDTH HH:MI:SS') FROM DUAL;
+
+-- 문자열을 날짜 형식으로 변환하는 함수
+-- TO_DATE(문자열, 날짜포맷)
+SELECT TO_DATE('2002-01-01', 'YYYY-MM-DD') FROM DUAL;
+SELECT TO_DATE('2002-01-01', 'YYYY-MM-DD HH:MI:SS') FROM DUAL;
+
+-- 문자열을 날짜형식으로 변환하는 함수2
+-- TO_TIMESTAMP(문자열)
+SELECT TO_TIMESTAMP('2002-01-01', 'YYYY-MM-DD HH:MI:SS') FROM DUAL;
+
+-- 문자열을 숫자 형식으로 변환하는 함수
+-- TO_NUMBER(문자열)
+SELECT TO_NUMBER('2020') FROM DUAL;
+SELECT TO_NUMBER('2') + 3 FROM DUAL;
+
