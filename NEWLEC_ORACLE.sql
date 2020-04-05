@@ -469,3 +469,29 @@ SELECT TO_TIMESTAMP('2002-01-01', 'YYYY-MM-DD HH:MI:SS') FROM DUAL;
 SELECT TO_NUMBER('2020') FROM DUAL;
 SELECT TO_NUMBER('2') + 3 FROM DUAL;
 
+
+--028 NULL FUNCTION
+-- 반환값이 NULL일때 대체 값을 제공하는 함수
+-- NVL(컬럼명(NULL), 대체값)
+SELECT NULL + 3 FROM DUAL;
+SELECT AGE + 3 FROM MEMBER;
+SELECT NVL(GENDER, 0) FROM MEMBER;
+SELECT TRUNC(NVL(AGE, 0)/10) * 10 연령대 FROM MEMBER;
+
+-- NVL에서 조건을 하나 더 확장한 함수
+-- NVL2(컬럼명(NULL), NOTNULL 대체값, NULL 대체값)
+SELECT NVL2(AGE, TRUNC(AGE/10)*10, 0) 연령대2 FROM MEMBER;
+
+-- 두 값이 같은 경우 NULL, 다른 경우 첫 번째 값 반환 함수
+-- NULLIF(값1, 값2)
+SELECT NAME, NULLIF(AGE, 40) FROM MEMBER;
+
+-- 조건에 따른 값을 선택하는 함수
+-- DECODE(기준값, 비교값, 출력값, 나머지 출력값)
+SELECT DECODE(PWD, 
+            '111', '일일일', 
+            '222', '이이이', 
+            '333', '삼삼삼',
+            '기타') FROM MEMBER;
+
+
