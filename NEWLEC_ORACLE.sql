@@ -495,3 +495,19 @@ SELECT DECODE(PWD,
             '기타') FROM MEMBER;
 
 
+--029   SELECT, ORDER BY
+-- SELECT 구절의 순서(바뀌면 안 됨)
+-- SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY
+-- FROM : 데이터 가공을 위해 데이터를 연산하는 공간
+-- WHERE : 조건 필터링
+-- GROUP BY : 데이터 집계 (COUNT, AVG)
+-- HAVING : 집계된 결과를 필터링
+-- ORDER BY : 정렬
+
+-- ORDER BY 정렬 : ASC(오름차순, DEFAULT, 생략 가능), DESC(내림차순)
+SELECT * FROM MEMBER ORDER BY NAME; -- 이름을 오름차순으로 정렬해서 조회
+SELECT * FROM MEMBER ORDER BY NAME DESC; -- 이름을 역순(내림차순)으로 정렬해서 조회
+SELECT * FROM MEMBER WHERE NAME LIKE '박%' ORDER BY AGE; -- 회원 중에서 '박'씨 성을 가진 회원을 나이 오름차순으로 정렬하여 조회
+
+SELECT * FROM NOTICE ORDER BY HIT DESC, REGDATE DESC;   -- 조회수 내림차순 조회하고 조회수가 같으면 등록일자 내림차순 조회
+
