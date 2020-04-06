@@ -672,3 +672,14 @@ GROUP BY N.ID, N.TITLE, N.WRITER_ID, M.NAME;
 
 SELECT * FROM NOTICEVIEW;
 
+
+--041 DATA DICTIONARY
+-- Data Dictionary : 사용자 정보, 권한, 테이블/뷰, 제약조건, 함수/프로시저 등등을 DBMS에서 저장하는 공간
+-- 최근에는 툴을 사용하여 손쉽게 조회 가능
+-- Data Dictionary는 VIEW 형태로 보여줌 (직접 테이블에 접근하지 못 하게 하기 위한 보안 목적)
+-- DBA_, ALL_, USER_ : 권한에 따른 네이밍
+SELECT * FROM DICT;
+SELECT * FROM USER_TABLES;  -- 테이블 조회
+SELECT * FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'MEMBER'; -- 테이블 컬럼 조회
+
+
