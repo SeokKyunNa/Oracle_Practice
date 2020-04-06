@@ -605,3 +605,13 @@ SELECT M.ID, M.NAME, COUNT(N.ID) FROM MEMBER M LEFT OUTER JOIN NOTICE N ON M.ID 
 -- 기준이 되는 왼쪽의 데이터는 모두 출력하고 관계있는 데이터를 오른쪽에 JOIN하여 합치는게 JOIN문의 기본
 
 
+--037  SELF JOIN
+-- 본인테이블과 본인테이블간의 JOIN
+-- 데이터가 서로 포함 관계를 가지는 경우에 사용 EX) 멤버들간의 상관관계
+-- 대댓글, 카테고리 등에서 자주 사용 됨
+ALTER TABLE MEMBER ADD BOSS_ID NVARCHAR2(50);
+
+SELECT * FROM MEMBER;
+SELECT M.*, B.NAME BOSS_NAME FROM MEMBER M LEFT OUTER JOIN MEMBER B ON B.ID = M.BOSS_ID;
+
+
