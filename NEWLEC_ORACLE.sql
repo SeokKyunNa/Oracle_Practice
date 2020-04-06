@@ -568,3 +568,17 @@ SELECT * FROM NOTICE ORDER BY REGDATE DESC
 SELECT * FROM MEMBER WHERE AGE >= (SELECT AVG(AGE) FROM MEMBER); -- 평균 나이 이상인 회원을 조회
 
 
+--034   INNER JOIN
+-- INNER JOIN, OUTER JOIN, SELF JOIN, CROSS JOIN(Cartesian Product)
+-- 서로 참조하는 테이블을 합쳐서 조회하는 방법
+-- 기준이 되는 쪽이 부모 테이블이 됨 EX) 회원정보=부모테이블, 게시판(작성자)=자식테이블
+
+-- 서로 관계 있는 레코드들만 합치는 조인을 INNER JOIN이라고 함
+SELECT * FROM MEMBER;
+SELECT * FROM NOTICE;
+SELECT * FROM MEMBER INNER JOIN NOTICE ON MEMBER.ID = NOTICE.WRITER_ID; -- ANSI SQL 표준 INNER JOIN 방법
+
+
+
+
+
