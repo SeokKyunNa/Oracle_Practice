@@ -569,16 +569,30 @@ SELECT * FROM MEMBER WHERE AGE >= (SELECT AVG(AGE) FROM MEMBER); -- 평균 나이 이
 
 
 --034   INNER JOIN
+-- 조인의 종류
 -- INNER JOIN, OUTER JOIN, SELF JOIN, CROSS JOIN(Cartesian Product)
 -- 서로 참조하는 테이블을 합쳐서 조회하는 방법
--- 기준이 되는 쪽이 부모 테이블이 됨 EX) 회원정보=부모테이블, 게시판(작성자)=자식테이블
+-- 기준이 되는 쪽(보통은 수가 더 적은 쪽)이 부모 테이블이 됨 EX) 회원정보=부모테이블, 게시판(작성자)=자식테이블
 
 -- 서로 관계 있는 레코드들만 합치는 조인을 INNER JOIN이라고 함
+-- ON절에 기준 컬럼 작성
 SELECT * FROM MEMBER;
 SELECT * FROM NOTICE;
 SELECT * FROM MEMBER INNER JOIN NOTICE ON MEMBER.ID = NOTICE.WRITER_ID; -- ANSI SQL 표준 INNER JOIN 방법
 
 
+--035   OUTER JOIN
+-- 서로 관계 없는 레코드들도 포함시키는 조인을 OUTER JOIN이라고 함
+-- LEFT OUTER JOIN : 왼쪽 테이블의 OUTER 데이터를 포함시킴
+-- RIGHT OUTER JOIN : 오른쪽 테이블의 OUTER 데이터를 포함시킴
+-- FULL OUTER JOIN : 양쪽 테이블의 OUTER 데이터를 포함시킴
+
+-- INNER JOIN이 기본값이기때문에 JOIN만 쓰면 INNER JOIN으로 처리됨
+SELECT * FROM NOTICE N JOIN MEMBER M ON N.WRITER_ID = M.ID;
+
+SELECT * FROM NOTICE N LEFT OUTER JOIN MEMBER M ON N.WRITER_ID = M.ID;
+SELECT * FROM NOTICE N RIGHT OUTER JOIN MEMBER M ON N.WRITER_ID = M.ID;
+SELECT * FROM NOTICE N FULL OUTER JOIN MEMBER M ON N.WRITER_ID = M.ID;
 
 
 
