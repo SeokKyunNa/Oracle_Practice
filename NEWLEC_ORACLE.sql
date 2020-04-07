@@ -686,9 +686,9 @@ SELECT * FROM USER_TAB_COLUMNS WHERE TABLE_NAME = 'MEMBER'; -- 테이블 컬럼 조회
 --042   CONSTRAINT
 -- 데이터 입력에 제한을 둠
 -- 도메인 > 엔티티 > 릴레이션 제약조건
+
 -- 도메인 : 컬럼의 유효한 값의 범위 EX) 0보다 큰 정수, 20자 내의 문자 등
 -- 속성에 도메인이 아닌 값이 올 수 없도록 하는 제약조건
-
 -- NOT NULL : NULL을 허용하지 않음
 -- DEFAULT : 값이 없으면 기본값을 넣음
 -- CHECK : 값의 유효 범위(도메인 범위)를 체크
@@ -698,7 +698,7 @@ CREATE TABLE TEST(
     ID VARCHAR2(50) NOT NULL,
     EMAIL VARCHAR2(200) NULL,
     PHONE CHAR(13) NOT NULL
-)
+);
 
 -- 테이블 생성 후 NOT NULL 제약 조건 적용 (기존 데이터에 NULL이 존재하면 불가)
 ALTER TABLE TEST MODIFY EMAIL VARCHAR2(200) NOT NULL;
@@ -709,9 +709,27 @@ CREATE TABLE TEST(
     EMAIL VARCHAR2(200) NULL,
     PHONE CHAR(13) NOT NULL,
     PWD VARCHAR2(200) DEFAULT '111' 
-)
+);
 
 -- 테이블 생성 후 DEFAULT 제약 조건 적용
 ALTER TABLE TEST MODIFY EMAIL VARCHAR2(200) DEFAULT '111';
 -- **툴 이용 시 접속 리스트의 테이블을 SQL 워크시트에 드래그하면 자동으로 기본 쿼리문을 생성할 수 있음
+
+
+--043   CHECK CONSTRAINT
+-- 데이터의 형식이나 범위를 제약
+
+-- 테이블 생성할 때 CHECK 제약 조건 적용
+CREATE TABLE TEST(
+    ID VARCHAR2(50) NOT NULL,
+    EMAIL VARCHAR2(200) NULL,
+    PHONE CHAR(13) CHECK(PHONE LIKE '010-%-____') NOT NULL
+);
+
+-- 테이블 생성 후 CHECK 제약 조건 적용
+-- ALTER TABLE ADD CONSTRAINT [제약조건명] CHECK([컬럼명] 조건)
+ALTER TABLE ADD CONSTRAINT CK_TEST_PHONE CHECK(PHONE LIKE '010-%-____');
+
+SELECT * FROM MEMBER;
+INSERT INTO MEMBER (ID, PWD, NAME, PHONE) VALUES('engsk1', '111', '나석', '000');   -- ORA-02290: 체크 제약조건(NEWLEC.MEMBER_PHONE_CHK)이 위배되었습니다
 
