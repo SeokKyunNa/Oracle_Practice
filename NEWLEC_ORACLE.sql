@@ -768,3 +768,21 @@ ALTER TABLE TEST ADD CONSTRAINT TEST_ID_PK PRIMARY KEY(ID);
 ALTER TABLE TEST ADD CONSTRAINT TEST_EMAIL_UQ UNIQUE(EMAIL);
 
 
+--046   SEQUENCE
+-- START WITH [시작값] : 시퀀스에서 첫번째로 시작할 값
+-- INCREMENT BY [증가값] : 증가시킬 양
+-- MINVALUE [최소값] : 시퀀스의 최소값
+-- MAXVALUE [최대값] : 시퀀스의 최대값
+-- CACHE/NOCACHE : 성능 향상을 위해 캐시에 설정된 숫자만큼 시퀀스를 미리 만들어둠
+-- CYCLE : 최대값에 도달한 후의 처리 방식
+-- ORDER : 시퀀스의 정렬을 할 것인지
+
+-- [시퀀스명].NEXTVAL : 다음 시퀀스 값 
+INSERT INTO NOTICE (ID, TITLE, WRITER_ID)
+VALUES(SEQ_NOTICE_ID.NEXTVAL, '시퀀스 테스트001', 'engsk1211');
+
+-- 테이블 컬럼 설정의 DEFAULT값에 시퀀스를 넣으면 INSERT시 입력하지 않아도 자동으로 값이 입력됨
+INSERT INTO NOTICE (TITLE, WRITER_ID)
+VALUES('시퀀스 테스트 002', 'newlec1');
+
+
